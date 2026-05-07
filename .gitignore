@@ -1,0 +1,20 @@
+# Dependency installs
+node_modules/
+**/node_modules/
+
+# Python caches and virtual environments
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Environment files
+.env
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Local editor or stray files
+git
