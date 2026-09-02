@@ -159,20 +159,13 @@ async def alerts(limit: int = Query(25, ge=1, le=100), db: AsyncSession = Depend
 @router.websocket("/ws/feedmind")
 @router.websocket("/ws/sentiment")
 async def feedmind_ws(websocket: WebSocket):
-    # Log handshake headers to help debug 403/Origin issues
-    try:
-        origin = websocket.headers.get("origin")
-        headers_list = [(k, v) for k, v in websocket.headers.items()]
-        print(f"WebSocket handshake attempt - Origin: {origin}, Headers: {headers_list}")
-    except Exception as exc:
-        print(f"Failed to read websocket headers: {exc}")
-
     await manager.connect(websocket)
-    await websocket.send_json({"event": "connection", "message": "connected", "channel": "feedmind"})
     try:
+        await websocket.send_json({"event": "connection", "message": "connected", "channel": "feedmind"})
         while True:
             await websocket.receive_text()
     except WebSocketDisconnect:
         manager.disconnect(websocket)
     except Exception:
         manager.disconnect(websocket)
+

@@ -27,4 +27,4 @@ export const api = {
   alerts: () => request('/api/alerts'),
 }
 
-export const WS_URL = import.meta.env.VITE_WS_URL ?? 'ws://localhost:8000/ws/feedmind'
+export const WS_URL = import.meta.env.VITE_WS_URL ?? 'ws://localhost:8000/api/ws/feedmind'
